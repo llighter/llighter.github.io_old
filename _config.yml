@@ -20,7 +20,7 @@ description: > # this means to ignore newlines until "baseurl:"
   여러분들과 소통하는 공간 입니다. 즐거운 여행되세요 :)
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: @llighter90
+twitter_username: \@llighter90
 github_username:  llighter
 
 # Build settings
