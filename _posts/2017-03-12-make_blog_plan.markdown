@@ -2,7 +2,7 @@
 layout: post
 title:  "Blog 요구사항 정리"
 date:   2017-03-13 12:18:00 +0900
-categories: daily_life 
+categories: daily_life update
 ---
 
 [Theme][Theme]에서 다양한 Templete을 찾아보고 적용할 테마를 고르자.
