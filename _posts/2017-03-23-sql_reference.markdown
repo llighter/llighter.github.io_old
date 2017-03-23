@@ -1,9 +1,11 @@
 ---
 layout: post
-title:  "팍스디지타 문화"
+title:  "SQL REFERENCE 및 교육자료"
 date:   2017-03-23 10:50:00 +0900
 categories: database sql
 ---
+
+- EDX.org
 
 - W3School 에서는 기본적인 SQL문에 대한 설명과 실습이 가능하다.
 [W3School SQL Tutorial][W3School SQL Tutorial]
