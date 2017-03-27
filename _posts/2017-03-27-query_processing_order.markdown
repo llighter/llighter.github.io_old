@@ -44,7 +44,7 @@ ORDER BY
 물론 위의 순서가 모든 구절을 포함하는 것은 아니다.
 
 이 사진은 옵션을 포함한 오라클의 쿼리 프로세싱 순서이다.
-[Oracle’s query processing order, including optional clauses.]{{ site.url }}/assets/screenshot.jpg
+{{ site.url }}/assets/query-proc-order.png
 
 이러한 처리 순서때문에 예상치 못한 에러가 발생하기도 한다.
 {% highlight SQL %}
