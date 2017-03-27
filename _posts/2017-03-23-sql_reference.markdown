@@ -15,3 +15,7 @@ categories: database sql
 
 - Oracle SQL and PL/SQL Optimization for Developers 는 레퍼런스 북으로 이론 및 다양 한 예제를 확인 할 수 있다.
 [Oracle SQL and PL/SQL Optimization for Developers][Oracle SQL and PL/SQL Optimization for Developers]
+
+[W3School SQL Tutorial]:https://www.w3schools.com/sql/
+[ORACLE Live SQL]:https://livesql.oracle.com/apex/livesql/file/index.html
+[Oracle SQL and PL/SQL Optimization for Developers]:http://oracle.readthedocs.io/en/latest/index.html
