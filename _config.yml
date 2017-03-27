@@ -19,7 +19,7 @@ description: > # this means to ignore newlines until "baseurl:"
   안녕하세요? 저는 박윤하입니다. 만나서 반갑습니다. 이곳은 제가 공부한 내용을 올리고
   여러분들과 소통하는 공간 입니다. 즐거운 여행되세요 :)
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://llighter.me" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: llighter90
 github_username:  llighter
 
