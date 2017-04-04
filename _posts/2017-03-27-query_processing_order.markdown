@@ -18,7 +18,7 @@ SELECT
     f.product AS beer
   , p.product AS crisps
 FROM
-  fridge f
+  fridge fs
 CROSS JOIN
   pantry p
 WHERE
