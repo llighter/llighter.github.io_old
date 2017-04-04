@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "QUERY PROCESSING ORDER 퀴리 처리 순서"
+title:  "QUERY PROCESSING ORDER 쿼리 처리 순서"
 date:   2017-03-27 12:30:00 +0900
 categories: database sql
 ---
