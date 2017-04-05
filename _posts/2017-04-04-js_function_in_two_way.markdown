@@ -8,7 +8,7 @@ categories: javascript jQuery
 # jQuery(javascript)에서는 함수를 사용하는 방법이 크게 두가지가 있다.
 아래의 내용은 [MDN-Defining functions][Defining functions]의 내용을 참고한 것이다.
 
-* The function declaration(function statement)
+# The function declaration(function statement)
 {% highlight javascript %}
 function name([param[, param[, ... param]]]) {
    statements
@@ -23,7 +23,7 @@ function name([param[, param[, ... param]]]) {
 **statements**
 - The statements comprising the body of the function.
 
-* Function expression(function expression)
+# Function expression(function expression)
 {% highlight Javascript %}
 function [name]([param[, param[, ... param]]]) {
    statements
