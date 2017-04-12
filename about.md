@@ -4,11 +4,10 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+I'm Yunha Park, a Developer. I am interested in Web development and Machine Learning these days. Especially Angular is my favorite framework. I am planning to post about my interest. If you want to contact me, Please contact me at [hadbsgk@gmail.com](hadbsgk@gmail.com)
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jekyll" %} /
-[minima](https://github.com/jekyll/minima)
+You can find the my github repository at:
+{% include icon-github.html username="llighter" %}
 
 You can find the source code for Jekyll at
 {% include icon-github.html username="jekyll" %} /
