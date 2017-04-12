@@ -70,7 +70,7 @@ console.log(`Fifteen is ${a + b} and\nnot ${2 * a + b}.`);
 // not 20."
 {% endhighlight typescript %}
 
-위의 방식은 ES2015에서 지원하는 방식이고 Angular에서는 처음 예제와 같이 `\{{}}` 을 사용한다. 
+위의 방식은 ES2015에서 지원하는 방식이고 Angular에서는 처음 예제와 같이 {{}} 을 사용한다. 
 
 
 
