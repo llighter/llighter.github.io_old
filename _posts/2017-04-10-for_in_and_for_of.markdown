@@ -48,7 +48,7 @@ for(element of myTagList) {
     element.style.color="white";
 }
 {% endhighlight javascript %}
-[for ... of][3]는 반복할수 있는 객체들(우리는 myTagList)에 대해 그 안에 있는 객체(myTagList[1], ..)를 다룬다. 따라서 myTagList의 property에 상관 없이 우리가 원하는 객체에 접근할 수 있다.
+[for ... of][3]는 반복할수 있는 객체들(우리는 myTagList)에 대해 그 안에 있는 객체(myTagList\[1], ..)를 다룬다. 따라서 myTagList의 property에 상관 없이 우리가 원하는 객체에 접근할 수 있다.
 
 
 
