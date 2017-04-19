@@ -2,7 +2,7 @@
 layout: post
 title:  "Package.json에 depencency 추가하기"
 date:   2017-04-12 11:00:00 +0900
-categories: participate mnd
+categories: node npm
 ---
 
 Angular는 [NPM][1]을 통해 패키지를 관리한다. Angular 공부를 시작하면서 여러가지 툴들을 사용하게 되는데 이것도 npm은 외부 라이브러리를 사용하려면 필수적으로 알아야 하는 것 중 하나이다.
