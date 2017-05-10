@@ -1,0 +1,104 @@
+---
+layout: post
+title:  "Angular4.0 constuctor에서 ngOninit으로"
+date:   2017-05-10 20:00:00 +0900
+categories: angular ionic
+---
+
+나는 현재 Angular 기반 [ionic framework][2]를 [firebase][3]와 연동하여 기본적인 어플리케이션([ionic-angularfire2][1])을 개발하고 있다.
+firebase를 연동하는 것이 처음이라 많은 부분이 새롭고 고쳐야 할 부분이 많다.
+
+오늘 비교할 **두 코드** 또한 마찬가지이다.
+Angular는 `컴포넌트`로 이루어져 있고 컴포넌트는 `생성자`를 통해 초기화 된다. Angular에서는 `DB Service`나 `Logger`와 같은 서비스들은 `싱글톤`(하나의 인스턴스를 가진다.)으로 구성하는 것을 권장하고 있는데 실제 사용할 때에는 해당 컴포넌트의 constructor에서 파라미터로 줘서 사용하게 된다. 
+
+이 때 파라미터로 선언하는 것이외에 컴포넌트 생성 초기에 작업해야할 부분들이 있을 수 있다. 가령 (아래의 예제에서 살펴보겠지만)데이터베이스에서 목록을 읽어들어온다 던지 현재 사용자의 상태를 업데이트 하는 경우를 들수 있다. 이러한 로직들은 흔히 constructor에 넣어서 구현할 수 있다. **하지만 이것은 바람직한 방향이 아니다.** [Angular 공식 문서][6]에서 보면 생성자에 불필요한 로직을 추가하지 말고 최대한 가볍고 간단하게 구성하라고 권하고 있다. 이러한 권장사항에 대한 근거로 Angular팀을 이끌고 있는 Misko Hevery가 쓴 [Flaw: Constructor does Real Work][4]에서 정리한 내용을 간단히 언급하겠다.(영어 해석이 올바르지 않거나 부정확할 수 있다는점을 고려하자. :( )
+
+> 생성자가 collaborators를 생성 / 초기화하거나, 다른 서비스와 통신하는것과 같은 다양한 작업들은 테스팅을 어렵게 한다. 
+
+복잡한 Constructor를 작성해서는 안되는 이유를 살펴보면(깊게 알면 좋겠지만 나는 마음으로 와닿는 순간 이렇게 해야겠다고 속으로 인정을 하고 넘어갔다.)
+* Single Responsibility Principle을 위반한다.
+* 직접적인 테스트가 어렵다.
+* (직접적인 테스트를 우회하는)Subclassing과 Override to Test는 여전히 결함이있다.
+* Collaborators를 강요한다.(불필요한 객체를 생성하고 싶지 않다.)
+
+> 결국 클래스를 독립적으로 또는 [test-double][5]로 구성하는 것을 얼마나 쉽게 할 수 있는지에 대한 문제로 귀결된다. 이것이 어렵다면 constructor에서 너무 많을 기능을 처리하고 있다는 것이고, 쉽다면 당신은 잘하고 있는것이다.
+
+
+#### 아래의 코드를 두 코드를 통해 어떻게 처리하는 지 살펴보자.
+
+먼저 바뀌기 전 코드이다. 이 코드에서는 `Constructor`에서 `firebase`를 연동하여 로그인 시 사용자의 이름을 설정하고 해당 사용자의 uid와 연결된 데이터를 불러오는 작업을 처리한다.
+
+{% highlight typescript %}
+export class HomePage {
+  user: Observable<firebase.User>;
+  categories: FirebaseListObservable<any[]>;
+  userName: string;
+
+  constructor(public navCtrl: NavController
+        , public alertCtrl: AlertController
+        , private afAuth: AngularFireAuth
+        , private db: AngularFireDatabase) {
+    
+    this.user = afAuth.authState;
+    this.user.subscribe((user: firebase.User) => {
+      if(user != null) {
+        this.userName = user.displayName;
+        this.categories = this.db.list(user.uid);
+        this.categories.subscribe(categories => console.log(`[Categories]${categories}`));
+        console.log(`[constructor]userName : ${this.userName}`);
+      } else {
+        this.userName = 'Not yet Logged in..';
+      }
+    });
+  }
+
+  ...
+}
+{% endhighlight typescript %}
+
+
+이번 코드에서는 `ngOnInit()` 에서 `Constructor`에 있던 복잡한 로직들을 가져와서 처리했다.
+{% highlight typescript %}
+export class HomePage implements OnInit{
+  user: Observable<firebase.User>;
+  categories: FirebaseListObservable<any[]>;
+  userName: string;
+
+  constructor(public navCtrl: NavController
+        , public alertCtrl: AlertController
+        , private afAuth: AngularFireAuth
+        , private db: AngularFireDatabase) {
+  }
+
+  ngOnInit(): void {
+    this.user = this.afAuth.authState;
+    this.user.subscribe((user: firebase.User) => {
+      if(user != null) {
+        this.userName = user.displayName;
+        this.categories = this.db.list(user.uid);
+        this.categories.subscribe(categories => console.log(`[Categories]${JSON.stringify(categories)}`));
+        console.log(`[constructor]userName : ${this.userName}`);
+      } else {
+        this.userName = 'Not yet Logged in..';
+      }
+    });
+  }}
+
+  ...
+}
+{% endhighlight typescript %}
+
+`ngOnInit()`을 사용하는 [두 가지 중요한 이유][6]는
+1. 생성자를 호출한 직후 복잡한 초기화 과정(여기서는 `username`, `categories`)을 수행하기 위해서
+2. Angular가 `@input`들을 처리한 후 컴포넌트를 설정하기 위해서(여기서는 사용하지 않음)
+이 있다. 이상으로 내 코드를 수정하면서 개선했던 내용에 대해 알아보았다.
+
+위의 코드들은 [여기][1]에서 확인할 수 있다. 도움이 되었다면 [여기][1]에서 별표를 찍어준다면 좋을 것같다.
+
+
+[1]: https://github.com/llighter/ionic-angularfire2
+[2]: http://ionicframework.com/
+[3]: https://firebase.google.com/
+[4]: http://misko.hevery.com/code-reviewers-guide/flaw-constructor-does-real-work/
+[5]: https://medium.com/@SlackBeck/%EB%8B%A8%EC%9C%84-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BC%80%EC%9D%B4%EC%8A%A4%EC%99%80-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EB%8D%94%EB%B8%94-test-double-2b88cccd6a96
+[6]: https://angular.io/docs/ts/latest/guide/lifecycle-hooks.html
