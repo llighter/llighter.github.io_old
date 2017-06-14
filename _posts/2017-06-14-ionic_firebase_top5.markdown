@@ -5,7 +5,7 @@ date:   2017-06-14 15:00:00 +0900
 categories: angular ionic
 ---
 
-나는 현재 Angular 기반 [ionic framework][2]를 [firebase][3]와 연동하여 기본적인 어플리케이션([ionic-studycard][1])을 개발하고 있다.
+나는 현재 Angular 기반 [Ionic framework][2]를 [firebase][3]와 연동하여 기본적인 어플리케이션([ionic-studycard][1])을 개발하고 있다.
 
 ![CARD-SYSTEM]({{ site.url }}/assets/Leitner_system.png)
 
@@ -25,8 +25,8 @@ export class CardDTO {
 
 개발 환경이 Angular 기반의 Ionic이기 때문에 Firebase를 직접 사용하지 않고 [Angularfire2][5] 라는 모듈을 설치해서 진행을 하였다. Firebase를 이해하고 있다면 큰 어려움이 없을 것이라 생각하고 간단히 설명하려고 한다.
 
-#### 출력화면은 다음과 같다.
-(출력화면)
+#### **출력화면은 다음과 같다.**
+![TOP5]({{ site.url }}/assets/top5.gif)
 
 > `select`에서 `카테고리`를 선택하면 그 카테고리에 있는 데이터를 조회하여 `TOP 5`를 보여주는 것이다.
 
@@ -59,15 +59,17 @@ getTopFailCount(): void {
 이 문제를 해결하는 방법을 두가지 떠올렸다.
 
 1. [Custom Pipe][9]를 활용하기
+
 리스트 형태로 값을 가지고 있기 때문에 [Custom Pipe][9]을 활용하면 리스트 목록을 내림차순으로 정리하여 출력할 수 있다.
 관련 코드는 구글링을 통해 스택오버플로우에서 [Invert Angular 2 *ngFor][6]에 잘 정리가 되어있다. 나는 곧장 이 코드를 활용하여 내 어플리케이션에 적용을 했지만 결과는 실패였다.
 
 이유는 앞서 말했듯이 Firebase는 조회 결과를 [Observable][10]로 반환하기 때문에 위의 코드 처럼 `| asnyc`파이프를 붙여야 하고 이 파이프는 결과를 비동기적으로 받아와서 출력하겠다는 것이기 때문에 리스트의 순서를 조작하는 파이프와 같이 쓰일 수가 없었다.
 
 2. [Map Operator(Map 연산자)][11]을 활용하기
+
 [Map 연산자][11]는 Observable 소스가 방출하는 각 항목에 대해 내가 구현한 함수를 적용하고 그 결과를 Observable에 반환한다.
 동작 방식은 다음과 같다.
-![MAP-OPERATOR]({{ site.url }}/assets/map-operator.png)
+![MAP-OPERATOR]({{ site.url }}/assets/map-operator.PNG)
 
 {% highlight typescript %}
 .map( (list) => { return list.reverse() }

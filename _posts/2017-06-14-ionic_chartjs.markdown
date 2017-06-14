@@ -5,7 +5,7 @@ date:   2017-06-14 12:00:00 +0900
 categories: angular ionic
 ---
 
-나는 현재 Angular 기반 [ionic framework][3]를 [firebase][4]와 연동하여 기본적인 어플리케이션([ionic-studycard][1])을 개발하고 있다.
+나는 현재 Angular 기반 [Ionic framework][3]를 [firebase][4]와 연동하여 기본적인 어플리케이션([ionic-studycard][1])을 개발하고 있다.
 
 ![BASIC-USAGE]({{ site.url }}/assets/basic.gif)
 
