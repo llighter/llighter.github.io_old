@@ -9,6 +9,5 @@ I'm Yunha Park, a Developer. I am interested in Web development and Machine Lear
 You can find the my github repository at:
 {% include icon-github.html username="llighter" %}
 
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+You can find the my Medium Blog at 
+[medium](https://medium.com/@llighter)
